@@ -61,23 +61,23 @@ Start-Process "C:\Program Files\Google\Chrome\Application\chrome.exe" "--remote-
 ### Basic Usage
 
 ```powershell
-npm run share -- --url "https://chatgpt.com/gpts/editor/g-abc123..." --emails "emails.txt"
+node share.js --url "https://chatgpt.com/gpts/editor/g-abc123..." --emails "emails.txt"
 ```
 
 ### Advanced Usage
 
 ```powershell
 # Dry run (test without sharing)
-npm run share -- --url "https://chatgpt.com/gpts/editor/g-abc123..." --emails "emails.txt" --dryRun
+node share.js --url "https://chatgpt.com/gpts/editor/g-abc123..." --emails "emails.txt" --dryRun
 
 # Resume from where you left off
-npm run share -- --url "https://chatgpt.com/gpts/editor/g-abc123..." --emails "emails.txt" --resume
+node share.js --url "https://chatgpt.com/gpts/editor/g-abc123..." --emails "emails.txt" --resume
 
 # Limit to 10 emails with custom delays
-npm run share -- --url "https://chatgpt.com/gpts/editor/g-abc123..." --emails "emails.txt" --max 10 --delayMinMs 2000 --delayMaxMs 5000
+node share.js --url "https://chatgpt.com/gpts/editor/g-abc123..." --emails "emails.txt" --max 10 --delayMinMs 2000 --delayMaxMs 5000
 
 # Custom Chrome profile and port
-npm run share -- --url "https://chatgpt.com/gpts/editor/g-abc123..." --emails "emails.txt" --profileDir "C:\my-profile" --cdpPort 9223
+node share.js --url "https://chatgpt.com/gpts/editor/g-abc123..." --emails "emails.txt" --profileDir "C:\my-profile" --cdpPort 9223
 ```
 
 ### Report-only summary (no browser automation)
@@ -200,7 +200,7 @@ node share.js --url "https://chatgpt.com/gpts/editor/g-..." --emails "emails.txt
 If you see frequent failures, increase the delay:
 
 ```powershell
-npm run share -- --url "..." --emails "..." --delayMinMs 5000 --delayMaxMs 10000
+node share.js --url "..." --emails "..." --delayMinMs 5000 --delayMaxMs 10000
 ```
 
 ## Repository History (baseline vs current)
