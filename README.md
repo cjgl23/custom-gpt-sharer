@@ -51,7 +51,7 @@ Close Chrome when you’re done. The tool will reuse the warmed profile director
 ### Example (your exact path)
 
 ```powershell
-$profileDir = "C:\Users\P1323327\Code\custom-gpt-sharer\chrome-profile"
+$profileDir = "C:\Users\<User>\custom-gpt-sharer\chrome-profile"
 New-Item -ItemType Directory -Path $profileDir -Force
 Start-Process "C:\Program Files\Google\Chrome\Application\chrome.exe" "--remote-debugging-port=9222 --user-data-dir=$profileDir https://chatgpt.com"
 ```
@@ -159,11 +159,11 @@ If Cloudflare keeps re-appearing or the automation can’t proceed, the most rel
 
 1. **Close all Chrome sessions** (all windows).
 2. **Delete** the existing `chrome-profile` directory in the utility root path:
-   - `C:\Users\P1323327\Code\custom-gpt-sharer\chrome-profile`
+   - `C:\Users\<User>\custom-gpt-sharer\chrome-profile`
 3. **Run the manual bootstrap** to recreate the directory and start Chrome:
 
 ```powershell
-$profileDir = "C:\Users\P1323327\Code\custom-gpt-sharer\chrome-profile"
+$profileDir = "C:\Users\<User>\custom-gpt-sharer\chrome-profile"
 Start-Process "C:\Program Files\Google\Chrome\Application\chrome.exe" `
   "--remote-debugging-port=9222 --user-data-dir=$profileDir https://chatgpt.com"
 ```
@@ -175,7 +175,7 @@ Start-Process "C:\Program Files\Google\Chrome\Application\chrome.exe" `
 6. Re-run the tool (it will reuse the warmed profile directory):
 
 ```powershell
-cd C:\Users\P1323327\Code\custom-gpt-sharer
+cd C:\Users\<User>\custom-gpt-sharer
 node share.js --url "https://chatgpt.com/gpts/editor/g-..." --emails "emails.txt"
 ```
 
