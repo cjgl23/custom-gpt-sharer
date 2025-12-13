@@ -23,6 +23,7 @@ The GPT Share Bot is a command-line utility that uses browser automation to inte
 - **Command Pattern**: CLI interface for user inputs
 - **Template Method**: Sequential email processing workflow
 - **Observer Pattern**: Progress reporting and error handling
+- **Fail-Closed Verification**: Treat “unknown” UI state as failure until confirmed via re-opened Share modal
 
 ## Component Relationships
 ### Core Components
@@ -31,11 +32,13 @@ The GPT Share Bot is a command-line utility that uses browser automation to inte
 - **Browser Controller**: Manages Playwright automation
 - **Share Processor**: Executes sharing logic for each email
 - **Error Handler**: Manages failures and retry logic
+- **Report-Only Summary**: Prints run-scoped stats from persisted ledger without browser automation (`scripts/summary.js`)
 
 ### Data Flow
 1. CLI arguments → File Reader → Email list validation
 2. Email list → Browser Controller → GPT sharing interface
 3. Sequential processing → Progress tracking → Completion report
+4. Optional: reporting-only mode → email list + persisted ledger → run-scoped summary output
 
 ## API Patterns
 - Command-line interface following standard conventions
@@ -47,3 +50,4 @@ The GPT Share Bot is a command-line utility that uses browser automation to inte
 - Comprehensive logging of all operations
 - User-friendly error messages
 - Retry logic for transient failures
+- Avoid false positives by verifying persistence (close + re-open Share modal and re-check for email)
