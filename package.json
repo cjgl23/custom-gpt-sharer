@@ -1,0 +1,34 @@
+{
+  "name": "gpt-share-automator",
+  "version": "1.0.0",
+  "description": "Automate sharing of custom GPTs to email lists",
+  "main": "share.js",
+  "type": "module",
+  "engines": {
+    "node": "22.11.0"
+  },
+  "scripts": {
+    "share": "node share.js",
+    "summary": "node scripts/summary.js",
+    "test": "node share.js --dryRun --emails test-emails.txt --url https://chatgpt.com/gpts/editor/test"
+  },
+  "keywords": [
+    "chatgpt",
+    "gpt",
+    "automation",
+    "sharing",
+    "cli"
+  ],
+  "author": "Corporate Development Team",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "playwright-core": "^1.48.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "."
+  },
+  "os": [
+    "win32"
+  ]
+}

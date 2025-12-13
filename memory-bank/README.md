@@ -15,6 +15,9 @@ projectbrief.md          # Foundation - shapes all other files
     └── techContext.md       # Technologies, setup, constraints
             └── activeContext.md # Current focus, recent changes, next steps
                     └── progress.md      # What works, what's left, status
+
+Optional:
+changeLog.md             # Project evolution relative to the initial repo baseline
 ```
 
 ## Core Files

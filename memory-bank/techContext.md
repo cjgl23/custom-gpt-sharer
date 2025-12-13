@@ -26,7 +26,14 @@ npm install playwright-core
 
 ### Running Locally
 ```powershell
-node index.js --emails emails.txt --gpt "My Custom GPT"
+npm run share -- --url https://chatgpt.com/gpts/editor/<id> --emails emails.txt
+```
+
+### Reporting-only (no browser automation)
+Use this to validate run-scoped reporting without opening Chrome:
+
+```powershell
+npm run summary -- emails.txt
 ```
 
 ### Environment Variables
@@ -36,10 +43,23 @@ node index.js --emails emails.txt --gpt "My Custom GPT"
 
 ## Technical Constraints
 - **Corporate Restrictions**: No npx, no venv, no Docker, no standalone browser drivers
-- **Browser**: Must use existing Chrome installation via CDP attach
+- **Browser**: Use existing Chrome installation with a persistent profile directory (Playwright `launchPersistentContext`)
 - **Node Version**: Fixed at v22.11.0, cannot be changed
 - **Package Installation**: Only npm install allowed
 - **Playwright**: Must use playwright-core, not full Playwright package
+
+## Operational Notes (Cloudflare / first run)
+- On first run (or after deleting `./chrome-profile`), you may need to complete:
+  - Cloudflare “are you human” check (if shown)
+  - ChatGPT login
+- If Cloudflare keeps looping, a reliable workaround is:
+  - Close all Chrome windows
+  - Delete `./chrome-profile`
+  - Launch Chrome once manually with that profile dir to clear Cloudflare/login, then close Chrome and re-run the tool
+
+## Reliability Notes (Share modal behavior)
+- The “Add people…” field requires selecting a dropdown suggestion (clicking the option) to actually add an invitee.
+- Success verification should not “assume success”; confirm by re-opening the Share modal and ensuring the email appears in the shared list.
 
 ## Dependencies
 ### Production Dependencies
