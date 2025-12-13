@@ -1,5 +1,0 @@
-# Sample email file for testing
-# One email per line, comments are ignored
-
-renny.varughese@singtel.com
-ezekiel.juanis@singtel.com
