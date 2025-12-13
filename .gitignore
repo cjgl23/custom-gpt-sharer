@@ -9,6 +9,12 @@ package-lock.json
 state/
 artifacts/
 
+# User-specific email lists (never commit real emails)
+emails.txt
+test-emails.txt
+*-emails.txt
+*.emails.txt
+
 # Logs
 logs
 *.log

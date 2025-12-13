@@ -1,0 +1,8 @@
+# Sample email file for GPT Share Automator
+# One email per line, comments starting with # are ignored
+# Copy this file to emails.txt and replace with your actual recipient emails
+
+colleague@example.com
+team.member@company.com
+another.user@organization.org
+
