@@ -1,6 +1,6 @@
 import { chromium } from 'playwright-core';
 import { SELECTORS, getFirstSelector, waitForAnySelector, WAIT_TIMES } from './selectors.js';
-import { Utils } from './utils.js';
+import { Utils, CHROME_PATHS } from './utils.js';
 
 export class GPTSharer {
   constructor(options) {
@@ -80,7 +80,7 @@ export class GPTSharer {
   async initialize() {
     console.log('Initializing Chrome...');
 
-    const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+    const chromePath = this.options.chromePath || CHROME_PATHS[0];
     const userDataDir = this.options.profileDir;
 
     try {
@@ -483,20 +483,10 @@ export class GPTSharer {
       // Save the changes
       await this.saveShareChanges();
 
-      // Check for success
-      const success = await this.detectShareSuccess(email);
-
-      if (success) {
-        // Even if a toast/list is detected, we still verify persistence to avoid false positives.
-        await this.verifySharePersisted(email);
-        console.log(`✅ Successfully shared to: ${email}`);
-        return { status: 'success', timestamp: new Date().toISOString() };
-      } else {
-        // Fail closed, and verify by re-opening Share modal before concluding failure.
-        await this.verifySharePersisted(email);
-        console.log(`✅ Successfully shared to: ${email}`);
-        return { status: 'success', timestamp: new Date().toISOString() };
-      }
+      // Verify persistence regardless of toast detection (fail-closed approach)
+      await this.verifySharePersisted(email);
+      console.log(`✅ Successfully shared to: ${email}`);
+      return { status: 'success', timestamp: new Date().toISOString() };
 
     } catch (error) {
       console.error(`❌ Failed to share to ${email}: ${error.message}`);

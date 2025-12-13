@@ -99,7 +99,6 @@ Optional:
 
 * `--profileDir "<path>"` (default: `%USERPROFILE%\gpt-share-automator\chrome-profile`)
 * `--chromePath "<path to chrome.exe>"` (autodetect if omitted)
-* `--cdpPort 9222` (default 9222)
 * `--dryRun` (open Share dialog, no saving)
 * `--resume` (skip emails already marked success)
 * `--max <n>` (process first n emails, useful for testing)

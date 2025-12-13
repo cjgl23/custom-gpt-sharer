@@ -117,14 +117,15 @@ export async function getFirstSelector(page, selectors) {
   return null;
 }
 
-// Helper function to wait for any of the selectors to appear
+// Helper function to wait for any of the selectors to appear (returns on first match)
 export async function waitForAnySelector(page, selectors, timeout = 5000) {
-  const promises = selectors.map(selector =>
-    page.waitForSelector(selector, { timeout }).catch(() => null)
-  );
+  const promises = selectors.map(async (selector) => {
+    const result = await page.waitForSelector(selector, { timeout }).catch(() => null);
+    if (result) return result;
+    throw new Error('not found');
+  });
 
-  const results = await Promise.all(promises);
-  return results.find(result => result !== null);
+  return Promise.any(promises).catch(() => null);
 }
 
 // Common wait times

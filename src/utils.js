@@ -1,6 +1,12 @@
 import { writeFileSync, readFileSync, existsSync, mkdirSync } from 'fs';
 import { join, dirname, isAbsolute, resolve } from 'path';
 
+// Centralized Chrome executable paths for Windows
+export const CHROME_PATHS = [
+  'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+  'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+];
+
 export class Utils {
   // Generate random delay between min and max milliseconds
   static randomDelay(minMs = 1000, maxMs = 3000) {
@@ -74,7 +80,7 @@ export class Utils {
 
   // Get Chrome bootstrap command for PowerShell
   static getChromeBootstrapCommand(profileDir, port = 9222) {
-    const chromePath = 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe';
+    const chromePath = CHROME_PATHS[0];
     const absoluteProfileDir = isAbsolute(profileDir)
       ? profileDir
       : resolve(process.cwd(), profileDir);

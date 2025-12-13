@@ -13,7 +13,6 @@ function parseArgs(argv) {
       out._.push(a);
       continue;
     }
-    if (!a.startsWith('--')) continue;
     const key = a.slice(2);
     const next = args[i + 1];
     if (next && !next.startsWith('--')) {

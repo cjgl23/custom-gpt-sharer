@@ -56,7 +56,7 @@ async function main() {
   console.log('\n⚙️  Configuration:');
   console.log(`  URL: ${options.url}`);
   console.log(`  Profile: ${options.profileDir}`);
-  console.log(`  CDP Port: ${options.cdpPort}`);
+  console.log(`  Chrome: ${options.chromePath}`);
   console.log(`  Dry Run: ${options.dryRun ? 'Yes' : 'No'}`);
   console.log(`  Resume: ${options.resume ? 'Yes' : 'No'}`);
   console.log(`  Emails to process: ${emailList.length}`);

@@ -67,7 +67,6 @@ npm run summary -- emails.txt
 | `--emails` | ✅ | - | Path to email list file |
 | `--profileDir` | ❌ | `./chrome-profile` | Chrome profile directory |
 | `--chromePath` | ❌ | Auto-detected | Chrome executable path |
-| `--cdpPort` | ❌ | `9222` | CDP port for manual bootstrap |
 | `--dryRun` | ❌ | `false` | Show actions without executing |
 | `--resume` | ❌ | `false` | Skip already successful emails |
 | `--max` | ❌ | Unlimited | Maximum emails to process |

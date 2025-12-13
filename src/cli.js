@@ -1,5 +1,6 @@
 import { readFileSync, existsSync } from 'fs';
 import { join, isAbsolute, resolve } from 'path';
+import { CHROME_PATHS } from './utils.js';
 
 export class CLIParser {
   constructor() {
@@ -83,8 +84,6 @@ export class CLIParser {
       ? rawProfileDir
       : resolve(process.cwd(), rawProfileDir);
 
-    this.options.cdpPort = parseInt(this.options.cdpPort) || 9222;
-
     // Validate numeric options
     if (this.options.max !== undefined) {
       const max = parseInt(this.options.max);
@@ -133,22 +132,23 @@ export class CLIParser {
 
   // Auto-detect Chrome path if not provided
   async detectChromePath() {
-    const possiblePaths = [
-      'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
-      'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
-      join(process.env.USERPROFILE || '', 'AppData\\Local\\Google\\Chrome\\Application\\chrome.exe')
-    ];
-
-    for (const path of possiblePaths) {
+    // Check centralized paths first
+    for (const path of CHROME_PATHS) {
       if (existsSync(path)) {
         return path;
       }
     }
 
+    // Check user-local Chrome installation
+    const userLocalPath = join(process.env.USERPROFILE || '', 'AppData\\Local\\Google\\Chrome\\Application\\chrome.exe');
+    if (existsSync(userLocalPath)) {
+      return userLocalPath;
+    }
+
     // Fallback - let user know they need to provide it
     throw new Error(
       'Chrome not found in standard locations. Please specify --chromePath explicitly.\n' +
-      'Typical location: C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe'
+      `Typical location: ${CHROME_PATHS[0]}`
     );
   }
 
@@ -165,7 +165,6 @@ REQUIRED ARGUMENTS:
 OPTIONAL ARGUMENTS:
   --profileDir <dir>   Chrome profile directory (default: ./chrome-profile)
   --chromePath <path>  Path to Chrome executable (auto-detected if not provided)
-  --cdpPort <port>     Chrome DevTools Protocol port (default: 9222)
   --dryRun             Show what would be done without actually sharing
   --resume             Skip emails already marked as successful in results.json
   --max <number>       Maximum number of emails to process (unlimited if not specified)
