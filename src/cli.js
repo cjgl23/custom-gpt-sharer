@@ -123,8 +123,11 @@ export class CLIParser {
   isValidUrl(url) {
     try {
       const parsedUrl = new URL(url);
-      return parsedUrl.hostname === 'chatgpt.com' &&
-             parsedUrl.pathname.includes('/gpts/editor/');
+      return parsedUrl.protocol === 'https:' &&
+             parsedUrl.username === '' &&
+             parsedUrl.password === '' &&
+             parsedUrl.hostname === 'chatgpt.com' &&
+             parsedUrl.pathname.startsWith('/gpts/editor/');
     } catch {
       return false;
     }
