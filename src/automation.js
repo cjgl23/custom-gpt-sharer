@@ -98,9 +98,8 @@ export class GPTSharer {
       this.context = await chromium.launchPersistentContext(userDataDir, {
         executablePath: chromePath,
         headless: false, // Run in headful mode to allow user interaction/login
-        args: [
-          '--no-sandbox', // Recommended for some environments
-        ],
+        // Keep Chromium's OS sandbox enabled: this browser holds a logged-in
+        // ChatGPT profile, so disabling it would weaken browser isolation.
         timeout: WAIT_TIMES.EXTRA_LONG * 6
       });
 
